@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "organic-shop-28c06": {
+      "hosting": {
+        "organic-shop": [
+          "organic-shop-28c06"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "organic-shop-28c06"
+  }
+}

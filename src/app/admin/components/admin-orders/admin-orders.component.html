@@ -1,0 +1,26 @@
+<h1>Orders</h1>
+    <ngx-datatable 
+    class="material" 
+    [rows]="rows"
+    [columnMode]="ColumnMode.force" 
+    [headerHeight]="50" 
+    [footerHeight]="50"
+    [rowHeight]="50"
+    [limit]="5"
+    >
+    <ngx-datatable-column name="Customer" prop = "shipping.name">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+        {{row.shipping.name}}
+        </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Date" prop = "datePlaced">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+        {{row.datePlaced | date}}
+        </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Actions" prop = "key">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+        <a [routerLink]="['/orders/', row.key]">View</a>
+        </ng-template>
+    </ngx-datatable-column>
+    </ngx-datatable>

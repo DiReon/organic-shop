@@ -1,0 +1,40 @@
+<nav class="navbar navbar-expand-lg  navbar-light bg-light sticky-top">
+    <a class="navbar-brand" routerLink = "/">
+      <fa-icon [icon]="faLeaf"></fa-icon>
+    </a>
+    <button class="navbar-toggler" type="button" (click)="isMenuCollapsed = !isMenuCollapsed">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse" style="z-index: 2000">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" routerLink = "/shopping-cart" (click)="isMenuCollapsed = true">
+            <fa-icon [icon]="faCart"></fa-icon>
+            <span class="badge badge-warning badge-pill" *ngIf = "cart$ |async as cart" >{{ cart.totalItemCount }}</span>
+          </a>
+
+        </li>
+        <ng-template #anonymousUser>
+          <li class="nav-item">
+            <a class="nav-link" routerLink = "/login" (click)="isMenuCollapsed = true">Login</a>
+          </li>
+        </ng-template>
+        
+        <li ngbDropdown *ngIf = "appUser as user; else anonymousUser" class="nav-item dropdown">
+          <a ngbDropdownToggle class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {{ appUser.name }}
+          </a>
+          <div ngbDropdownMenu class="dropdown-menu">
+            <a class="dropdown-item" routerLink = "/my/orders" (click)="isMenuCollapsed = true">My Orders</a>
+            <ng-container *ngIf = appUser.isAdmin>
+              <a class="dropdown-item" routerLink = "/admin/orders" (click)="isMenuCollapsed = true">Manage Orders</a>
+              <a class="dropdown-item" routerLink = "/admin/products" (click)="isMenuCollapsed = true">Manage Products</a>
+            </ng-container>
+            <a class="dropdown-item" (click) = "logout()">Logout</a>
+          </div>
+        </li>
+        
+      </ul>
+    </div>
+  </nav>

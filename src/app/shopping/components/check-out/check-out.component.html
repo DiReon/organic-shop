@@ -1,0 +1,42 @@
+<h1>Shipping</h1>
+<div class="row">
+    <div class="col-md">
+        <form #f= "ngForm">
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input #name="ngModel" [(ngModel)] = "shipping.name" name = "name" type="text" class="form-control" id="name">
+            </div>
+            <div class="form-group">
+              <label for="address">Address</label>
+              <input #address1="ngModel" [(ngModel)] = "shipping.address1" name = "address1" type="text" class="form-control" id="address1" placeholder="Line 1">
+              <br><br>
+              <input #address2="ngModel" [(ngModel)] = "shipping.address2" name = "address2" type="text" class="form-control" id="address2" placeholder="Line 2">
+            </div>
+            <div class="form-group">
+                <label for="city">City</label>
+                <input #city="ngModel" [(ngModel)] = "shipping.city" name = "city" type="text" class="form-control" id="city">
+              </div>
+            <button (click)= "placeOrder()" class="btn btn-primary">Place Order</button>
+        </form>
+    </div>
+    <div class="col-md" *ngIf = "cart$ | async as cart">
+        <h2>Order Summary</h2>
+        <p>
+            You have {{ cart.totalItemCount }} items in your shopping cart
+        </p>
+        <table class="table">
+            <tbody>
+                <tr *ngFor = "let item of cart.itemsArr">
+                    <td>{{ cart.getQuantity(item) }} x {{ item.title }}</td>
+                    <td>{{ item.totalPrice }}</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th>Total</th>
+                    <th>{{ cart.totalPrice }}</th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
